@@ -4,6 +4,13 @@ const initialState = {
   data: [],
   status: "fulfilled",
 };
+
+export const getProducts = createAsyncThunk("products", async () => {
+  const data = await fetch("https://dummyjson.com/products");
+  const result = await data.json();
+  return result.products;
+});
+
 const productSlice = createSlice({
   name: "products",
   initialState,
@@ -24,9 +31,3 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-
-export const getProducts = createAsyncThunk("products", async () => {
-  const data = await fetch("https://dummyjson.com/products");
-  const result = await data.json();
-  return result.products;
-});
